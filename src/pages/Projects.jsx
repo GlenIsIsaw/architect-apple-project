@@ -58,32 +58,39 @@ const Projects = () => {
     : projects.filter(project => project.category === key);
 
   return (
-    <section id="projects" className="fade-in">
+    <section id="projects" className="projects-section">
       <Container>
-        <h2 className="section-title">
-          <span className="highlight">03.</span> Architectural Works
-        </h2>
-        
-        <Tabs
-          id="projects-tabs"
-          activeKey={key}
-          onSelect={(k) => setKey(k)}
-          className="mb-5 arch-tabs"
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          <Tab eventKey="all" title="All Projects" />
-          <Tab eventKey="cultural" title="Cultural" />
-          <Tab eventKey="residential" title="Residential" />
-          <Tab eventKey="commercial" title="Commercial" />
-          <Tab eventKey="public" title="Public" />
-        </Tabs>
+          <h2 className="section-title">
+            <span className="section-number">03.</span> Architectural Works
+          </h2>
+          
+          <Tabs
+            id="projects-tabs"
+            activeKey={key}
+            onSelect={(k) => setKey(k)}
+            className="projects-tabs mb-5"
+          >
+            <Tab eventKey="all" title="All Projects" />
+            <Tab eventKey="cultural" title="Cultural" />
+            <Tab eventKey="residential" title="Residential" />
+            <Tab eventKey="commercial" title="Commercial" />
+            <Tab eventKey="public" title="Public" />
+          </Tabs>
+        </motion.div>
         
-        <Row className="g-4">
+        <Row className="projects-grid">
           {filteredProjects.map((project, index) => (
-            <Col key={project.id} lg={6}>
+            <Col key={project.id} lg={6} className="project-col">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02 }}
               >
                 <ProjectCard project={project} />
               </motion.div>

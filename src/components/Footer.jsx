@@ -31,7 +31,7 @@ const Footer = () => {
             ))}
           </div>
           <p className="text-secondary mb-2">
-            Designed & Built by John Doe
+            Designed & Built by Glen
           </p>
           <p className="text-secondary small">
             © {new Date().getFullYear()} All Rights Reserved

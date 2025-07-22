@@ -77,10 +77,10 @@ const CustomNavbar = () => {
               },
               {
                 icon: <HiOutlineMail />,
-                url: `https://mail.google.com/mail/?view=cm&fs=1&to=studio@yourarchitecture.com&su=${encodeURIComponent(
+                url: `https://mail.google.com/mail/?view=cm&fs=1&to=roblesfernalynann@gmail.com&su=${encodeURIComponent(
                   "Project Inquiry from Your Website"
                 )}&body=${encodeURIComponent(
-                  "Hello,\n\nI'm interested in discussing a potential project. Here are some details:\n\n- Project Type: \n- Budget: \n- Timeline: \n\nLooking forward to your reply.\n\nBest regards,\n[Your Name]"
+                  "Hello,\n\nI'm interested in discussing a potential project. Here are some details:\n\n- Project Type: \n- Budget: \n- Timeline: \n- Contact Number: \n- Message: \n\nLooking forward to your reply.\n\nBest regards,\n[Your Name]"
                 )}`,
               },
             ].map((social, index) => (

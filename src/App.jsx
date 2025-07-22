@@ -8,6 +8,7 @@ import Skills from './pages/Skills';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import Footer from './components/Footer';
+import ProjectStatus from './components/ProjectStatus';
 import { ThemeProvider } from './context/ThemeContext';
 import { Container, Button } from 'react-bootstrap';
 import { FiSun, FiMoon } from 'react-icons/fi';
@@ -23,6 +24,7 @@ function App() {
         <About />
         <Skills />
         <Projects />
+        <ProjectStatus />
         <Contact />
         <Footer />
       </Container>

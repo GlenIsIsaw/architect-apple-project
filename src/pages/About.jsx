@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { motion } from "framer-motion";
-import architectImage from "../assets/sample-project.jpg";
+import architectImage from "../assets/ArchApple.png";
 
 const About = () => {
   const profileData = {

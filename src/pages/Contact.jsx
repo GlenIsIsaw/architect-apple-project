@@ -5,8 +5,11 @@ import {
   Col,
   Form,
   Button,
+  Spinner, Alert,
 } from "react-bootstrap";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [inputType, setInputType] = useState("email");
@@ -17,8 +20,11 @@ const Contact = () => {
     projectType: "",
     projectDetails: ""
   });
-  const [errors, setErrors] = useState({});
+const [errors, setErrors] = useState({});
   const [phoneError, setPhoneError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const navigate = useNavigate();
 
   const toggleInputType = () => {
     setInputType((prev) => (prev === "email" ? "phone" : "email"));
@@ -88,14 +94,47 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      // Form is valid, proceed with submission
-      console.log('Form submitted:', formData);
-      // Add your submission logic here
-    }
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setSubmitError("");
+  
+  if (!validateForm()) return;
+  
+  setIsLoading(true);
+  
+  try {
+    await emailjs.send(
+     import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  {
+        from_name: formData.name,
+        from_contact: formData.contact,
+        from_address: formData.address,
+        project_type: formData.projectType,
+        project_details: formData.projectDetails,
+        date: new Date().toLocaleDateString() // Added timestamp
+      },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY // Public key instead of user ID
+    );
+    
+    navigate('/contact-success', {
+      state: {
+        name: formData.name,
+        contact: formData.contact,
+        timestamp: new Date().toISOString() // For tracking
+      }
+    });
+    
+  } catch (error) {
+    console.error('Submission error:', error);
+    setSubmitError(
+      error.response?.text || 
+      'Message failed. Please email directly at roblesfernalynam@gmail.com'
+    );
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <section id="contact" className="contact-section">
@@ -150,19 +189,25 @@ const Contact = () => {
               <div className="info-item">
                 <h4>Phone</h4>
                 <p>
-                  <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                  <a href="tel:+15551234567">+63 920 573 7388</a>
                 </p>
               </div>
             </motion.div>
           </Col>
 
           <Col lg={7} className="contact-form">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <Form onSubmit={handleSubmit}>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            {submitError && (
+              <Alert variant="danger" className="mb-4">
+                {submitError}
+              </Alert>
+            )}
+            
+            <Form onSubmit={handleSubmit}>
                 <Row className="g-3">
                   <Col md={6}>
                     <Form.Group controlId="formName">
@@ -206,9 +251,9 @@ const Contact = () => {
                               maxLength={11}
                               required
                             />
-                            <div className="text-muted small mt-1">
+                            {/* <div className="text-muted small mt-1">
                               Format: 09XXXXXXXXX (11 digits)
-                            </div>
+                            </div> */}
                           </>
                         )}
                       </div>
@@ -290,15 +335,30 @@ const Contact = () => {
                       )}
                     </Form.Group>
                   </Col>
-                  <Col md={12} className="text-end">
-                    <Button
-                      variant="primary"
-                      type="submit"
-                      className="submit-btn"
-                    >
-                      SEND MESSAGE
-                    </Button>
-                  </Col>
+              <Col md={12} className="text-end">
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="submit-btn"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <>
+                      <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                        className="me-2"
+                      />
+                      Sending...
+                    </>
+                  ) : (
+                    "SEND MESSAGE"
+                  )}
+                </Button>
+              </Col>
                 </Row>
               </Form>
             </motion.div>

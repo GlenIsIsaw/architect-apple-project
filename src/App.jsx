@@ -1,8 +1,10 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { init } from '@emailjs/browser';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import ContactSuccess from './components/ContactSuccess';
 import About from './pages/About';
 import Skills from './pages/Skills';
 import Projects from './pages/Projects';
@@ -15,21 +17,33 @@ import { FiSun, FiMoon } from 'react-icons/fi';
 import './App.css';
 
 function App() {
+  useEffect(() => {
+    // Initialize with environment variable
+   init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+  }, []);
+
   return (
-    <Router>
-       <ThemeProvider>
-      <Navbar />
-       <Container fluid className="app-container">
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <ProjectStatus />
-        <Contact />
-        <Footer />
-      </Container>
-      </ThemeProvider>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Navbar />
+        <Container fluid className="app-container">
+          <Routes>
+            <Route path="/" element={
+              <>
+                <Hero />
+                <About />
+                <Skills />
+                <Projects />
+                <ProjectStatus />
+                <Contact />
+              </>
+            } />
+            <Route path="/contact-success" element={<ContactSuccess />} />
+          </Routes>
+          <Footer />
+        </Container>
+      </Router>
+    </ThemeProvider>
   );
 }
 
@@ -46,6 +60,5 @@ const ThemeToggle = () => {
     </Button>
   );
 };
-
 
 export default App;

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Tab, Tabs } from "react-bootstrap";
 import { motion } from "framer-motion";
+import img6 from "../assets/sample-project-6.jpg";
+import img7 from "../assets/sample-project-7.jpg";
+import img6 from "../assets/sample-project-6.jpg";
 
 // Sample data - can be moved to a separate file
 const statusProjects = [
@@ -13,7 +16,7 @@ const statusProjects = [
     year: "2023-2025",
     location: "Portland, OR",
     status: "ongoing",
-    image: "../src/assets/sample-project-6.jpg",
+    image: img6,
   },
   {
     id: 102,
@@ -23,7 +26,7 @@ const statusProjects = [
     year: "2023-2024",
     location: "Aspen, CO",
     status: "ongoing",
-    image: "../src/assets/sample-project-7.jpg",
+    image: img7,
   },
   {
     id: 201,
@@ -33,7 +36,7 @@ const statusProjects = [
     year: "2022",
     location: "Chicago, IL",
     status: "completed",
-    image: "../src/assets/sample-project-6.jpg",
+    image: img6,
   },
   // Add more projects...
 ];
@@ -69,40 +72,42 @@ const ProjectStatus = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-        <Row className="ps-grid">
-          {filteredProjects.map(
-            (
-              project // Changed from projects to filteredProjects
-            ) => (
-              <Col key={project.id} className="ps-card">
-                <div className="ps-image-wrapper">
-                  <img src={project.image} className="ps-image" />
-                  <span className={`ps-status ps-status-${project.status}`}>
-                    {project.status === "ongoing" ? "In Progress" : "Completed"}
-                  </span>
-                </div>
-                <div className="ps-card-content">
-                  <h3 className="ps-card-title">{project.title}</h3>
-                  <div className="ps-meta">
-                    <span>{project.year}</span>
-                    <span>{project.location}</span>
+          <Row className="ps-grid">
+            {filteredProjects.map(
+              (
+                project // Changed from projects to filteredProjects
+              ) => (
+                <Col key={project.id} className="ps-card">
+                  <div className="ps-image-wrapper">
+                    <img src={project.image} className="ps-image" />
+                    <span className={`ps-status ps-status-${project.status}`}>
+                      {project.status === "ongoing"
+                        ? "In Progress"
+                        : "Completed"}
+                    </span>
                   </div>
-                  <p className="ps-description">{project.description}</p>
-                  <div className="ps-tags">
-                    {project.tags.map((tag, index) => (
-                      <span
-                        key={`${project.id}-${tag}-${index}`}
-                        className="ps-tag"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  <div className="ps-card-content">
+                    <h3 className="ps-card-title">{project.title}</h3>
+                    <div className="ps-meta">
+                      <span>{project.year}</span>
+                      <span>{project.location}</span>
+                    </div>
+                    <p className="ps-description">{project.description}</p>
+                    <div className="ps-tags">
+                      {project.tags.map((tag, index) => (
+                        <span
+                          key={`${project.id}-${tag}-${index}`}
+                          className="ps-tag"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </Col>
-            )
-          )}
-        </Row>
+                </Col>
+              )
+            )}
+          </Row>
         </motion.div>
       </Container>
     </section>

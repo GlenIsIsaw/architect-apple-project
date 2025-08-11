@@ -3,7 +3,7 @@ import { Container, Row, Col, Tab, Tabs } from "react-bootstrap";
 import { motion } from "framer-motion";
 import img6 from "../assets/sample-project-6.jpg";
 import img7 from "../assets/sample-project-7.jpg";
-import img6 from "../assets/sample-project-6.jpg";
+import img8 from "../assets/sample-project-8.jpg";
 
 // Sample data - can be moved to a separate file
 const statusProjects = [
@@ -36,7 +36,7 @@ const statusProjects = [
     year: "2022",
     location: "Chicago, IL",
     status: "completed",
-    image: img6,
+    image: img8,
   },
   // Add more projects...
 ];

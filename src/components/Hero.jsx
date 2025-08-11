@@ -54,7 +54,8 @@ const Hero = () => {
               <img 
                 src={architectImage} 
                 alt="Fernalyn Robles - Architect"
-                loading='lazy' 
+                loading="eager"
+  fetchpriority="high"
                 className="hero-image img-fluid"
               />
             </motion.div>

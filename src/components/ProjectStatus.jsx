@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Tab, Tabs } from "react-bootstrap";
 import { motion } from "framer-motion";
-import img6 from "../assets/sample-project-6.jpg";
-import img7 from "../assets/sample-project-7.jpg";
-import img8 from "../assets/sample-project-8.jpg";
+import img6 from "../assets-webp/sample-project-6.webp";
+import img7 from "../assets-webp/sample-project-7.webp";
+import img8 from "../assets-webp/sample-project-8.webp";
 
 // Sample data - can be moved to a separate file
 const statusProjects = [

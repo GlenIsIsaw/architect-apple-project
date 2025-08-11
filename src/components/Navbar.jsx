@@ -24,7 +24,7 @@ const CustomNavbar = () => {
   return (
     <Navbar
       expand="lg"
-      fixed="top"
+      sticky="top"
       className={`navbar-custom ${scrolled ? "scrolled" : ""}`}
       expanded={expanded}
       onToggle={() => setExpanded(!expanded)}

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Tab, Tabs } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
-import archProject1 from '../assets/sample-project.jpg';
-import archProject2 from '../assets/sample-project-2.jpg';
-import archProject3 from '../assets/sample-project-3.jpg';
-import archProject4 from '../assets/sample-project-4.jpg';
+import archProject1 from '../assets-webp/sample-project.webp';
+import archProject2 from '../assets-webp/sample-project-2.webp';
+import archProject3 from '../assets-webp/sample-project-3.webp';
+import archProject4 from '../assets-webp/sample-project-4.webp';
 
 const Projects = () => {
   const [key, setKey] = useState('all');

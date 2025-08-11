@@ -13,7 +13,7 @@ const statusProjects = [
     year: "2023-2025",
     location: "Portland, OR",
     status: "ongoing",
-    image: "/src/assets/sample-project-6.jpg",
+    image: "../src/assets/sample-project-6.jpg",
   },
   {
     id: 102,
@@ -23,7 +23,7 @@ const statusProjects = [
     year: "2023-2024",
     location: "Aspen, CO",
     status: "ongoing",
-    image: "/src/assets/sample-project-7.jpg",
+    image: "../src/assets/sample-project-7.jpg",
   },
   {
     id: 201,
@@ -33,7 +33,7 @@ const statusProjects = [
     year: "2022",
     location: "Chicago, IL",
     status: "completed",
-    image: "/src/assets/sample-project-6.jpg",
+    image: "../src/assets/sample-project-6.jpg",
   },
   // Add more projects...
 ];

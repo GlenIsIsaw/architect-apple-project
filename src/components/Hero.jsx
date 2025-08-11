@@ -53,7 +53,8 @@ const Hero = () => {
             >
               <img 
                 src={architectImage} 
-                alt="John Doe - Architect" 
+                alt="Fernalyn Robles - Architect"
+                loading='lazy' 
                 className="hero-image img-fluid"
               />
             </motion.div>

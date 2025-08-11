@@ -63,7 +63,8 @@ const About = () => {
               >
                 <div className="profile-image-container">
                   <Image
-                    src={architectImage} 
+                    src={architectImage}
+                     loading='lazy'  
                     alt={`${profileData.name} - Architect`}
                     fluid
                     className="profile-image"

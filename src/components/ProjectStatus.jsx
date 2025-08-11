@@ -17,6 +17,7 @@ const statusProjects = [
     location: "Portland, OR",
     status: "ongoing",
     image: img6,
+     loading: 'lazy', 
   },
   {
     id: 102,
@@ -27,6 +28,7 @@ const statusProjects = [
     location: "Aspen, CO",
     status: "ongoing",
     image: img7,
+    loading: 'lazy', 
   },
   {
     id: 201,
@@ -37,6 +39,7 @@ const statusProjects = [
     location: "Chicago, IL",
     status: "completed",
     image: img8,
+    loading: 'lazy', 
   },
   // Add more projects...
 ];

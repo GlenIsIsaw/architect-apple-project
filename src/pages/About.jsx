@@ -6,7 +6,7 @@ import architectImage from "../assets-webp/ArchApple.webp";
 const About = () => {
   const profileData = {
     name: "Fernalyn Robles",
-    location: "San Francisco, CA",
+    location: "Daet, Camarines Norte",
     university: "Harvard Graduate School of Design",
     years: 10,
     projectTypes: "mixed-use developments and cultural institutions",

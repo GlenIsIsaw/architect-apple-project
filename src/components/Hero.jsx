@@ -15,10 +15,10 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <h6 className="text-uppercase letter-spacing mb-3">Architect & Designer</h6>
-              <h1 className="display-2 fw-light mb-3">Fernalyn Robles</h1>
+              <h6 className="text-uppercase letter-spacing mb-3">Designer & Builder</h6>
+              <h1 className="display-2 fw-light mb-3">JC Robles Design and Build</h1>
               <h2 className="display-5 fw-light mb-4 text-muted">
-                I design spaces that <span className="text-dark">inspire</span>
+               We design spaces that <span className="text-dark">inspire</span>
               </h2>
               <p className="lead mb-4">
                 With {new Date().getFullYear() - 2015}+ years of experience, I create thoughtful 
@@ -55,7 +55,7 @@ const Hero = () => {
                 src={architectImage} 
                 alt="Fernalyn Robles - Architect"
                 loading="eager"
-  fetchpriority="high"
+  fetchPriority="high"
                 className="hero-image img-fluid"
               />
             </motion.div>

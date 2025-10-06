@@ -36,7 +36,7 @@ const CustomNavbar = () => {
           transition={{ duration: 0.5, delay: 0.5 }}
         >
           <Navbar.Brand href="#home" className="navbar-brand">
-            <span className="brand-name">Architech Apple</span>
+            <span className="brand-name">JC Robles Design and Build</span>
           </Navbar.Brand>
         </motion.div>
 

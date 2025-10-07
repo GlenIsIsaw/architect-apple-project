@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import { FiChevronDown } from 'react-icons/fi';
-import architectImage from '../assets-webp/sample-project.webp'; // Your professional image
+import architectImage from '../assets-webp/Logo131.webp'; // Your professional image
 
 const Hero = () => {
   return (

@@ -49,7 +49,7 @@ const CustomNavbar = () => {
 
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto align-items-center">
-            {["About", "Skills", "Projects", "Contact"].map((item, index) => (
+            {["About", "Services", "Projects", "Contact"].map((item, index) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, y: -10 }}

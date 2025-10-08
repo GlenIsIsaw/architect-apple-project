@@ -31,7 +31,7 @@ const Hero = () => {
                   size="lg"
                   className="px-4 py-2 border-2"
                 >
-                  View Portfolio
+                  View Our Works
                 </Button>
                 <Button 
                   href="#contact" 

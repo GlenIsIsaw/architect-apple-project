@@ -37,7 +37,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="skills-section py-5">
+    <section id="core-competencies" className="skills-section py-5">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { motion } from "framer-motion";
-import { FiFacebook, FiLinkedin, FiTwitter } from "react-icons/fi";
+import { FiFacebook, FiLinkedin } from "react-icons/fi";
 import { HiOutlineMail } from "react-icons/hi";
 
 const CustomNavbar = () => {
@@ -10,16 +10,19 @@ const CustomNavbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Define your navigation sections and matching section IDs
+  const navItems = [
+    { label: "About", id: "about" },
+    { label: "Core Competencies", id: "core-competencies" }, // fixed match to your Skills section
+    { label: "Projects", id: "projects" },
+    { label: "Contact", id: "contact" },
+  ];
 
   return (
     <Navbar
@@ -30,6 +33,7 @@ const CustomNavbar = () => {
       onToggle={() => setExpanded(!expanded)}
     >
       <Container>
+        {/* Brand */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -40,6 +44,7 @@ const CustomNavbar = () => {
           </Navbar.Brand>
         </motion.div>
 
+        {/* Toggle (for mobile) */}
         <Navbar.Toggle
           aria-controls="basic-navbar-nav"
           className="navbar-toggler border-0"
@@ -47,27 +52,29 @@ const CustomNavbar = () => {
           <span className="toggler-icon"></span>
         </Navbar.Toggle>
 
+        {/* Nav Links */}
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto align-items-center">
-            {["About", "Services", "Projects", "Contact"].map((item, index) => (
+            {navItems.map((item, index) => (
               <motion.div
-                key={item}
+                key={item.id}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
               >
                 <Nav.Link
-                  href={`#${item.toLowerCase()}`}
+                  href={`#${item.id}`}
                   className="nav-link"
                   onClick={() => setExpanded(false)}
                 >
                   <span className="nav-number">{`0${index + 1}.`}</span>
-                  <span className="nav-text">{item}</span>
+                  <span className="nav-text">{item.label}</span>
                 </Nav.Link>
               </motion.div>
             ))}
           </Nav>
 
+          {/* Social icons */}
           <div className="social-icons d-flex mt-3 mt-lg-0 ms-lg-4">
             {[
               { icon: <FiLinkedin />, url: "https://linkedin.com" },

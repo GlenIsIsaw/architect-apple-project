@@ -1,46 +1,100 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Tab, Tabs } from "react-bootstrap";
 import { motion } from "framer-motion";
-import img6 from "../assets-webp/sample-project-6.webp";
-import img7 from "../assets-webp/sample-project-7.webp";
+import img6 from "../assets-webp/AncestralHouse.JPG.webp";
+import img7 from "../assets-webp/Laguna1.webp";
 import img8 from "../assets-webp/sample-project-8.webp";
+import img9 from "../assets-webp/SiennaHotel.webp";
+import img10 from "../assets-webp/GomezBuilding.webp";
+import img11 from "../assets-webp/DenrMay.webp";
+import img12 from "../assets-webp/NewProject.webp";
 
 // Sample data - can be moved to a separate file
 const statusProjects = [
   {
-    id: 101,
-    title: "Riverfront Cultural Hub",
+    id: 107,
+    title: "Three Story Apartment Building",
     description:
-      "Currently under construction, reimagining urban waterfront spaces.",
-    tags: ["Cultural", "Urban Design"],
-    year: "2023-2025",
-    location: "Portland, OR",
-    status: "ongoing",
+      "Modern three-storey apartment with roof deck emphasizing functional urban design.",
+    tags: ["Urban Design", "Modern Architecture"],
+    year: "2025",
+    location: "Manila",
+    status: "new",
+    image: img12,
+    loading: "lazy",
+  },
+  {
+    id: 101,
+    title: "Ancestral House",
+    description:
+      "Renovated ancestral home preserving traditional brick arches and classic Filipino wood craftsmanship.",
+    tags: ["Cultural Heritage", "Restoration"],
+    year: "2025",
+    location: "Imus, Cavite",
+    status: "completed",
     image: img6,
-     loading: 'lazy', 
+    loading: "lazy",
   },
   {
     id: 102,
-    title: "Mountain Eco Retreat",
-    description: "Luxury residential project in final construction phases.",
-    tags: ["Residential", "Eco-Friendly"],
-    year: "2023-2024",
-    location: "Aspen, CO",
-    status: "ongoing",
-    image: img7,
-    loading: 'lazy', 
+    title: "Sienna Hotel",
+    description:
+      "Contemporary commercial hotel featuring bold geometric lines and modern façade design.",
+    tags: ["Commercial", "Hospitality Design"],
+    year: "2022",
+    location: "Camarines Norte",
+    status: "completed",
+    image: img9,
+    loading: "lazy",
   },
   {
-    id: 201,
-    title: "Downtown Office Tower",
-    description: "Award-winning commercial space completed in 2022.",
-    tags: ["Commercial", "High-Rise"],
-    year: "2022",
-    location: "Chicago, IL",
-    status: "completed",
-    image: img8,
-    loading: 'lazy', 
+    id: 103,
+    title: "Bigtas Residential",
+    description: "Luxury residential project in final construction phases.",
+    tags: ["Residential", "Interior Design"],
+    year: "2023-2025",
+    location: "Biñan, Laguna",
+    status: "ongoing",
+    image: img7,
+    loading: "lazy",
   },
+  {
+    id: 104,
+    title: "Genuine Building",
+    description:
+      "Modern mixed-use building showcasing sleek horizontal lines and open façades.",
+    tags: ["Mixed-Use Development", "Structural Design"],
+    year: "2022",
+    location: "Camarines Norte",
+    status: "ongoing",
+    image: img8,
+    loading: "lazy",
+  },
+  {
+    id: 105,
+    title: "Gomez Building",
+    description:
+      "Commercial structure featuring modern symmetry and refined stone façade detailing.",
+    tags: ["Commercial", "Urban Design"],
+    year: "2023-2025",
+    location: "Camarines Norte",
+    status: "ongoing",
+    image: img10,
+    loading: "lazy",
+  },
+  {
+    id: 106,
+    title: "DENR EMB Building",
+    description:
+      "Sustainable government facility designed with vertical fins and eco-responsive architecture.",
+    tags: ["Government", "Eco-Friendly"],
+    year: "2024-2025",
+    location: "Camarines Norte",
+    status: "ongoing",
+    image: img11,
+    loading: "lazy",
+  },
+  
   // Add more projects...
 ];
 
@@ -86,7 +140,9 @@ const ProjectStatus = () => {
                     <span className={`ps-status ps-status-${project.status}`}>
                       {project.status === "ongoing"
                         ? "In Progress"
-                        : "Completed"}
+                        : project.status === "completed"
+                        ? "Completed"
+                        : "New"}
                     </span>
                   </div>
                   <div className="ps-card-content">

@@ -2,54 +2,87 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Tab, Tabs } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
-import archProject1 from '../assets-webp/sample-project.webp';
-import archProject2 from '../assets-webp/sample-project-2.webp';
-import archProject3 from '../assets-webp/sample-project-3.webp';
-import archProject4 from '../assets-webp/sample-project-4.webp';
+import archProject1 from '../assets-webp/BigtasResidential.webp';
+import archProject2 from '../assets-webp/GomezBuilding.webp';
+import archProject3 from '../assets-webp/AncestralHouse.JPG.webp';
+import archProject4 from '../assets-webp/SiennaHotel.webp';
+import archProject5 from '../assets-webp/DenrMay.webp';
+import archProject6 from '../assets-webp/rtc3.webp';
+import archProject7 from '../assets-webp/NewProject.webp';
 
 const Projects = () => {
   const [key, setKey] = useState('all');
   
   const projects = [
     {
-      id: 1,
-      title: 'Contemporary Art Museum',
-      description: 'Award-winning museum design featuring innovative light wells and sustainable materials. The project achieved LEED Platinum certification.',
-      tags: ['Cultural', 'Sustainable Design', '3D Modeling'],
-      image: archProject1,
-      year: '2023',
-      location: 'Berlin, Germany',
-      category: 'cultural'
-    },
-    {
-      id: 2,
-      title: 'Cliffside Residence',
-      description: 'Luxury residential project with cantilevered design overlooking the Mediterranean. Features local stone and passive cooling techniques.',
-      tags: ['Residential', 'Structural Innovation', 'Site Planning'],
-      image: archProject2,
-      year: '2022',
-      location: 'Santorini, Greece',
-      category: 'residential'
-    },
-    {
-      id: 3,
-      title: 'Mixed-Use Urban Development',
-      description: 'High-density development combining retail, office and residential spaces with green roofs and pedestrian-friendly plazas.',
-      tags: ['Urban Design', 'Zoning Analysis', 'Facade Design'],
-      image: archProject3,
-      year: '2021',
-      location: 'Singapore',
+      id: 7,
+      title: 'Three Story Apartment Building',
+      description: 'Three-storey apartment building with roof deck designed for urban efficiency, featuring clean geometric lines and balanced façade composition.',
+      tags: ['Residential', 'Structural Innovation', 'Modern Design' ],
+      image: archProject7,
+      year: '2025',
+      location: 'Manila',
       category: 'commercial'
     },
     {
+      id: 1,
+      title: 'Bigtas Residence',
+      description: 'A modern kitchen-dining area featuring layered ceiling coves and pendant lighting that balance functionality with elegant spatial framing.',
+      tags: ['Residential', 'Structural Innovation', 'Site Planning' ],
+      image: archProject1,
+      year: '2024',
+      location: 'Biñan, Laguna',
+      category: 'residential'
+    },
+    {
+      id: 2,
+      title: 'Gomez Building',
+      description: 'A commercial structure combining symmetry and modernist geometry with stone cladding to enhance façade texture and material contrast.',
+      tags: ['Cultural', 'Sustainable Design', '3D Modeling'],
+      image: archProject2,
+      year: '2023',
+      location: 'Daet, Camarines Norte',
+      category: 'commercial'
+    },
+    {
+      id: 3,
+      title: 'Atty. Buenaluz Ancestral House',
+      description: 'A restored heritage interior blending brick archways and carved wooden furniture, emphasizing traditional Filipino craftsmanship and spatial warmth.',
+      tags: ['Modern Design', 'Zoning Analysis', 'Facade Design'],
+      image: archProject3,
+      year: '2024',
+      location: 'Imus, Cavite',
+      category: 'cultural'
+    },
+    {
       id: 4,
-      title: 'Community Cultural Center',
-      description: 'Public space designed for social interaction and cultural activities, featuring flexible event spaces and indigenous material palette.',
+      title: 'Siennas Hotel',
+      description: 'A contemporary commercial building defined by bold linear forms, red façade accents, and rhythmic fenestration that convey a dynamic urban identity.',
       tags: ['Public Architecture', 'Community Engagement', 'Accessibility'],
       image: archProject4,
-      year: '2020',
-      location: 'Melbourne, Australia',
+      year: '2022',
+      location: 'Daet, Camarines Norte',
+      category: 'commercial'
+    },
+    {
+      id: 5,
+      title: 'DENR EMB Building',
+      description: 'A sustainable institutional design showcasing green terraces, vertical wooden fins, and a passive daylighting system for energy efficiency.',
+      tags: ['Public Architecture', 'Community Engagement', 'Accessibility'],
+      image: archProject5,
+      year: '2025',
+      location: 'Daet, Camarines Norte',
       category: 'public'
+    },
+    {
+      id: 6,
+      title: 'Genuine Building',
+      description: 'A two-story mixed-use facility emphasizing horizontal continuity and natural lighting through cantilevered balconies and large glazed openings.',
+      tags: ['Public Architecture', 'Community Engagement', 'Accessibility'],
+      image: archProject6,
+      year: '2022',
+      location: 'Daet, Camarines Norte',
+      category: 'commercial'
     }
   ];
 

@@ -7,8 +7,8 @@ const About = () => {
   const profileData = {
     name: "Fernalyn Robles",
     location: "Daet, Camarines Norte",
-    university: "Harvard Graduate School of Design",
-    years: 10,
+    university: "University of Sto. Thomas",
+    years: 15,
     projectTypes: "mixed-use developments and cultural institutions",
     designPrinciples: "contextual sensitivity and material honesty",
   };
@@ -52,7 +52,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="section-heading mb-5">
-            <span className="section-number">01.</span> About Me
+            <span className="section-number">01.</span> About Us
           </h2>
 
           <Row className="align-items-center">
@@ -82,13 +82,13 @@ const About = () => {
 
                 <div className="about-text mb-5">
                   <p className="mb-3">
-                    I specialize in creating thoughtful, sustainable spaces that
+                    We specialize in creating thoughtful, sustainable spaces that
                     harmonize with their environment while meeting clients'
                     functional needs.
                   </p>
                   <p>
-                    I hold a Master's in Architecture from{" "}
-                    {profileData.university} and have
+                    The person behind hold a Master's in Architecture from{" "}
+                    {profileData.university} and have{" "}
                     {profileData.years}+ years of professional experience
                     working with leading firms on projects ranging from{" "}
                     {profileData.projectTypes}. My design philosophy emphasizes{" "}
@@ -122,14 +122,14 @@ const About = () => {
                   </Row>
                 </div>
 
-                <div className="signature mt-5">
+                {/* <div className="signature mt-5">
                   <img
                     src={architectImage}
                     alt="Signature"
                     className="img-fluid"
                     style={{ height: "60px" }}
                   />
-                </div>
+                </div> */}
               </div>
             </Col>
           </Row>

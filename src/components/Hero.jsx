@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import { FiChevronDown } from 'react-icons/fi';
-import architectImage from '../assets-webp/Logo131.webp'; // Your professional image
+import architectImage from '../assets-webp/Logo2.webp'; // Your professional image
 
 const Hero = () => {
   return (
@@ -21,7 +21,7 @@ const Hero = () => {
                We design spaces that <span className="text-dark">inspire</span>
               </h2>
               <p className="lead mb-4">
-                With {new Date().getFullYear() - 2015}+ years of experience, I create thoughtful 
+                With {new Date().getFullYear() - 2010}+ years of experience, we create thoughtful 
                 architecture that blends form, function, and sustainability.
               </p>
               <div className="d-flex gap-3">

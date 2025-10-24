@@ -1,15 +1,17 @@
 import React, { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import {
   Container,
   Row,
   Col,
   Form,
   Button,
-  Spinner, Alert,
+  Spinner,
+  Alert,
 } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [inputType, setInputType] = useState("email");
@@ -18,9 +20,9 @@ const Contact = () => {
     contact: "",
     address: "", // Added address field
     projectType: "",
-    projectDetails: ""
+    projectDetails: "",
   });
-const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
   const [phoneError, setPhoneError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -28,9 +30,11 @@ const [errors, setErrors] = useState({});
 
   const toggleInputType = () => {
     setInputType((prev) => (prev === "email" ? "phone" : "email"));
-    setFormData(prev => ({ ...prev, contact: "" }));
+    setFormData((prev) => ({ ...prev, contact: "" }));
     setPhoneError("");
   };
+
+  const [captchaValue, setCaptchaValue] = useState(null);
 
   const handlePhoneChange = (e) => {
     const value = e.target.value;
@@ -48,93 +52,105 @@ const [errors, setErrors] = useState({});
       setPhoneError("");
     }
 
-    setFormData(prev => ({ ...prev, contact: value }));
-    if (errors.contact) setErrors(prev => ({ ...prev, contact: "" }));
+    setFormData((prev) => ({ ...prev, contact: value }));
+    if (errors.contact) setErrors((prev) => ({ ...prev, contact: "" }));
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors(prev => ({ ...prev, [name]: "" }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const validateForm = () => {
     const newErrors = {};
-    
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    
-    if (inputType === 'email') {
+
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+
+    if (inputType === "email") {
       if (!formData.contact.trim()) {
-        newErrors.contact = 'Email is required';
+        newErrors.contact = "Email is required";
       } else if (!/^\S+@\S+\.\S+$/.test(formData.contact)) {
-        newErrors.contact = 'Invalid email format';
+        newErrors.contact = "Invalid email format";
       }
     } else {
       if (!formData.contact.trim()) {
-        newErrors.contact = 'Phone number is required';
-      } else if (formData.contact.length !== 11 || !formData.contact.startsWith('09')) {
-        newErrors.contact = 'Invalid phone number (must be 11 digits starting with 09)';
+        newErrors.contact = "Phone number is required";
+      } else if (
+        formData.contact.length !== 11 ||
+        !formData.contact.startsWith("09")
+      ) {
+        newErrors.contact =
+          "Invalid phone number (must be 11 digits starting with 09)";
       }
     }
-    
+
     // Added address validation
     if (!formData.address.trim()) {
-      newErrors.address = 'Address is required';
+      newErrors.address = "Address is required";
     }
-    
-    if (!formData.projectType || formData.projectType === 'Select project type') {
-      newErrors.projectType = 'Please select a project type';
+
+    if (
+      !formData.projectType ||
+      formData.projectType === "Select project type"
+    ) {
+      newErrors.projectType = "Please select a project type";
     }
-    
+
     if (!formData.projectDetails.trim()) {
-      newErrors.projectDetails = 'Project details are required';
+      newErrors.projectDetails = "Project details are required";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setSubmitError("");
-  
-  if (!validateForm()) return;
-  
-  setIsLoading(true);
-  
-  try {
-    await emailjs.send(
-     import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-  {
-        from_name: formData.name,
-        from_contact: formData.contact,
-        from_address: formData.address,
-        project_type: formData.projectType,
-        project_details: formData.projectDetails,
-        date: new Date().toLocaleDateString() // Added timestamp
-      },
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY // Public key instead of user ID
-    );
-    
-    navigate('/contact-success', {
-      state: {
-        name: formData.name,
-        contact: formData.contact,
-        timestamp: new Date().toISOString() // For tracking
-      }
-    });
-    
-  } catch (error) {
-    console.error('Submission error:', error);
-    setSubmitError(
-      error.response?.text || 
-      'Message failed. Please email directly at roblesfernalynam@gmail.com'
-    );
-  } finally {
-    setIsLoading(false);
-  }
-};
+    e.preventDefault();
+    setSubmitError("");
+
+    if (!validateForm()) return;
+
+    if (!captchaValue) {
+      setSubmitError("Please verify the reCAPTCHA before submitting.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_contact: formData.contact,
+          from_address: formData.address,
+          project_type: formData.projectType,
+          project_details: formData.projectDetails,
+          date: new Date().toLocaleDateString(),
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      navigate("/contact-success", {
+        state: {
+          name: formData.name,
+          contact: formData.contact,
+          timestamp: new Date().toISOString(),
+        },
+      });
+    } catch (error) {
+      console.error("Submission error:", error);
+      setSubmitError(
+        error.response?.text ||
+          "Message failed. Please email directly at roblesfernalynann@gmail.com"
+      );
+    } finally {
+      setIsLoading(false);
+      setCaptchaValue(null); // reset captcha
+    }
+  };
 
   return (
     <section id="contact" className="contact-section">
@@ -196,22 +212,24 @@ const [errors, setErrors] = useState({});
           </Col>
 
           <Col lg={7} className="contact-form">
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            {submitError && (
-              <Alert variant="danger" className="mb-4">
-                {submitError}
-              </Alert>
-            )}
-            
-            <Form onSubmit={handleSubmit}>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              {submitError && (
+                <Alert variant="danger" className="mb-4">
+                  {submitError}
+                </Alert>
+              )}
+
+              <Form onSubmit={handleSubmit}>
                 <Row className="g-3">
                   <Col md={6}>
                     <Form.Group controlId="formName">
-                      <Form.Label>Your Name <span className="text-muted">*</span></Form.Label>
+                      <Form.Label>
+                        Your Name <span className="text-muted">*</span>
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         name="name"
@@ -221,14 +239,19 @@ const [errors, setErrors] = useState({});
                         required
                       />
                       {errors.name && (
-                        <div className="text-muted small mt-1">{errors.name}</div>
+                        <div className="text-muted small mt-1">
+                          {errors.name}
+                        </div>
                       )}
                     </Form.Group>
                   </Col>
                   <Col md={6}>
                     <Form.Group controlId="formContact">
                       <Form.Label>
-                        {inputType === "email" ? "Email Address" : "Phone Number"} <span className="text-muted">*</span>
+                        {inputType === "email"
+                          ? "Email Address"
+                          : "Phone Number"}{" "}
+                        <span className="text-muted">*</span>
                       </Form.Label>
                       <div className="fade-switch">
                         {inputType === "email" ? (
@@ -258,7 +281,9 @@ const [errors, setErrors] = useState({});
                         )}
                       </div>
                       {(errors.contact || phoneError) && (
-                        <div className="text-muted small mt-1">{errors.contact || phoneError}</div>
+                        <div className="text-muted small mt-1">
+                          {errors.contact || phoneError}
+                        </div>
                       )}
 
                       <div className="text-end mt-2">
@@ -281,7 +306,9 @@ const [errors, setErrors] = useState({});
                   {/* Added Address Field */}
                   <Col md={12}>
                     <Form.Group controlId="formAddress">
-                      <Form.Label>Full Address<span className="text-muted">*</span></Form.Label>
+                      <Form.Label>
+                        Full Address<span className="text-muted">*</span>
+                      </Form.Label>
                       <Form.Control
                         as="textarea"
                         rows={2}
@@ -292,13 +319,17 @@ const [errors, setErrors] = useState({});
                         required
                       />
                       {errors.address && (
-                        <div className="text-muted small mt-1">{errors.address}</div>
+                        <div className="text-muted small mt-1">
+                          {errors.address}
+                        </div>
                       )}
                     </Form.Group>
                   </Col>
                   <Col md={12}>
                     <Form.Group controlId="formProjectType">
-                      <Form.Label>Project Type <span className="text-muted">*</span></Form.Label>
+                      <Form.Label>
+                        Project Type <span className="text-muted">*</span>
+                      </Form.Label>
                       <Form.Select
                         name="projectType"
                         value={formData.projectType}
@@ -314,13 +345,17 @@ const [errors, setErrors] = useState({});
                         <option value="Other">Other</option>
                       </Form.Select>
                       {errors.projectType && (
-                        <div className="text-muted small mt-1">{errors.projectType}</div>
+                        <div className="text-muted small mt-1">
+                          {errors.projectType}
+                        </div>
                       )}
                     </Form.Group>
                   </Col>
                   <Col md={12}>
                     <Form.Group controlId="formProjectDetails">
-                      <Form.Label>Project Details <span className="text-muted">*</span></Form.Label>
+                      <Form.Label>
+                        Project Details <span className="text-muted">*</span>
+                      </Form.Label>
                       <Form.Control
                         as="textarea"
                         name="projectDetails"
@@ -331,34 +366,48 @@ const [errors, setErrors] = useState({});
                         required
                       />
                       {errors.projectDetails && (
-                        <div className="text-muted small mt-1">{errors.projectDetails}</div>
+                        <div className="text-muted small mt-1">
+                          {errors.projectDetails}
+                        </div>
                       )}
                     </Form.Group>
                   </Col>
-              <Col md={12} className="text-end">
-                <Button
-                  variant="primary"
-                  type="submit"
-                  className="submit-btn"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <>
-                      <Spinner
-                        as="span"
-                        animation="border"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                        className="me-2"
-                      />
-                      Sending...
-                    </>
-                  ) : (
-                    "SEND MESSAGE"
-                  )}
-                </Button>
-              </Col>
+                  <Col md={12} className="text-center mt-3">
+                    <ReCAPTCHA
+                      sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                      onChange={(value) => setCaptchaValue(value)}
+                    />
+                    {submitError && !captchaValue && (
+                      <div className="text-danger small mt-2">
+                        {submitError}
+                      </div>
+                    )}
+                  </Col>
+
+                  <Col md={12} className="text-end">
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      className="submit-btn"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? (
+                        <>
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                            className="me-2"
+                          />
+                          Sending...
+                        </>
+                      ) : (
+                        "SEND MESSAGE"
+                      )}
+                    </Button>
+                  </Col>
                 </Row>
               </Form>
             </motion.div>
